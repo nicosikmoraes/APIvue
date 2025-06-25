@@ -46,7 +46,7 @@ th {
 }
 
 .text {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 400;
   transition: 0.3s;
 }
