@@ -2,7 +2,9 @@
 
 Projeto teste para aprender o básico de PHP junto com vue;
 
-Até o momento já foi feita a conexão para realizar o cadastro diretamente no banco MySQL e o login, só consguindo entrar se a senha e o email for encontrado no db. Também tem um arquivo para realizar o SELECT de todos os itens da tabela users (única tabela até o momento);
+Até o momento já foi feita a conexão para realizar o cadastro diretamente no banco MySQL e o login, só consguindo entrar se a senha e o email for encontrado no db. Também tem um arquivo para realizar o SELECT de todos os itens da tabela users (única tabela até o momento), mostrando o resultado na tela inicial;
+
+Na tabela da página inicial foi adicionado um botão que quando clicado ele deleta aquele usuário no banco de dados e a lista é atualizada em sequência;
 
 Além da coneão com o banco de dados eu explorei o uso de pinia para a disponibilização de diferentes temas para o usuário;
 
@@ -14,11 +16,12 @@ Além da coneão com o banco de dados eu explorei o uso de pinia para a disponib
   - A senha quando passada no PHP dá pra criptografar ela (fácil);
   - Criar um Favicon;
 
-## Próximas etapas
-  - Dar uma função a essa aplicação;
-  - Criar a `Main Page`;
-  - Desenvolver a `Home Page`, não da pra deixar como está né;
-  - Para saber mais eu preciso ter a funcionalidade do mesmo...
+## Próximas etapas 
+  - Crud - OK;
+  - Cria opção de deletar - OK;
+  - Desenvolver a `Main Page`;
+  - Desenvolver a `Home Page`, - OK;
+  - ...
 
 ## Pontos Negativos
   - Toda parte de comunicação do frontend com o backend foi feita usando pinia e não em uma pasta de services;
@@ -27,3 +30,16 @@ Além da coneão com o banco de dados eu explorei o uso de pinia para a disponib
 ## Pontos Positivos
   - Ta tudo bem componentizado eu acredito;
   - Navbar e Footer componetizados;
+
+## Screenshots
+![image](https://github.com/user-attachments/assets/3ebcde47-23b6-4c73-9b11-f8de515afd3c)
+![image](https://github.com/user-attachments/assets/5696d43f-e4ab-4040-afb0-c90b8f2b09fa)
+![image](https://github.com/user-attachments/assets/aab19c22-de83-4639-882a-26d66285612d)
+![image](https://github.com/user-attachments/assets/3ea731c2-1859-4deb-92e5-5b5517361fec)
+![image](https://github.com/user-attachments/assets/a2480c60-da44-42c1-ab8b-7c8291bacc67)
+![image](https://github.com/user-attachments/assets/edb89ef9-064b-4535-ad7a-e31f2ef1f5c1)
+
+
+
+
+
