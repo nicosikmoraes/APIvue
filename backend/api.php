@@ -5,6 +5,10 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json");
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Para requisições OPTIONS (pré-flight)
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(204);
@@ -15,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 $users = [];
 
     // Database connection
-    $host = 'localhost';
+    $host = '127.0.0.1';
     $user = 'root';
     $pass = '16052006';
     $db = 'apivuedb';
@@ -31,6 +35,7 @@ $users = [];
 
         // SE FALHAR A CONEXÃO, RETORNA UM ERRO
         http_response_code(500);
+        echo json_encode(['error' => 'Erro ao conectar ao banco de dados', 'details' => $e->getMessage()]);
         exit;
     }
 

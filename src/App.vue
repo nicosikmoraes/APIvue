@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <div class="header">
-      <Navbar />
+      <Navbar v-if="navbarStore.showUnlogged" />
+      <NavbarLogged v-else />
     </div>
 
     <router-view />
@@ -13,8 +14,23 @@
 </template>
 
 <script setup>
-import Navbar from "./components/App/Navbar.vue"
+import Navbar from "./components/App/nav/Navbar.vue"
+import NavbarLogged from "./components/App/nav/NavbarLogged.vue"
 import Footer from "./components/App/Footer.vue"
+import { useNavbarStore } from "./stores/navbar"
+import { useUsersStore } from "./stores/users"
+import { useRouter } from "vue-router"
+import { onMounted } from "vue"
+
+const navbarStore = useNavbarStore()
+const userStore = useUsersStore()
+const router = useRouter()
+
+onMounted(() => {
+  if (userStore.isAuthenticated) {
+    router.push("/main")
+  }
+})
 </script>
 
 <style>

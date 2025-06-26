@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 $users = [];
 
     // Database connection
-    $host = 'localhost';
+    $host = '127.0.0.1';
     $user = 'root';
     $pass = '16052006';
     $db = 'apivuedb';

@@ -38,6 +38,7 @@ import { useColorStore } from "@/stores/colors"
 import { ref, computed } from "vue"
 import { useUsersStore } from "@/stores/users"
 import { useRouter } from "vue-router"
+import { useNavbarStore } from "@/stores/navbar"
 
 // Variáveis reativas para os campos do formulário
 const email = ref("")
@@ -47,6 +48,7 @@ const touchedEmail = ref(false)
 // Importa o store de cores
 const colorStore = useColorStore()
 const userStore = useUsersStore()
+const navbarStore = useNavbarStore()
 const router = useRouter()
 
 // Habilita o botão
@@ -64,6 +66,9 @@ const validEmail = computed(() => {
 async function checkLogin() {
   try {
     const user = await userStore.loginUser(email.value, password.value)
+
+    userStore.isAuthenticated = true
+    navbarStore.logged()
 
     router.push("/main")
   } catch (error) {

@@ -9,20 +9,14 @@
       <button id="login-btn" class="btn" @click="goToLogin()">Login</button>
       <button id="register-btn" class="btn" @click="goToRegister()">Cadastro</button>
 
-      <button
-        id="color-btn"
-        :style="{ backgroundColor: colorStore.btnColor }"
-        @click="colorStore.changeShowModal()"
-      ></button>
-
-      <ModalColors v-if="colorStore.showModal" />
+      <ColorComponent />
     </div>
   </div>
 </template>
 
 <script setup>
-import { useColorStore } from "../../stores/colors"
-import ModalColors from "./ModalColors.vue"
+import { useColorStore } from "../../../stores/colors"
+import ColorComponent from "./ColorComponent.vue"
 import { useRouter } from "vue-router"
 
 // Importa a rotas
@@ -92,21 +86,5 @@ h1:hover {
 #register-btn {
   border-left: 1px solid white;
   border-right: 1px solid white;
-}
-
-#color-btn {
-  width: 30px;
-  height: 30px;
-  border: none;
-  opacity: 0.9;
-  cursor: pointer;
-  padding: 0 0px;
-  margin-left: 20px;
-  border-radius: 200px;
-}
-
-#color-btn:hover {
-  opacity: 1;
-  transform: scale(1.1);
 }
 </style>

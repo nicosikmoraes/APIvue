@@ -52,12 +52,14 @@ import { useColorStore } from "@/stores/colors"
 import { ref, computed } from "vue"
 import { useUsersStore } from "@/stores/users"
 import { useRouter } from "vue-router"
+import { useNavbarStore } from "@/stores/navbar"
 
 // ============================== VARIABLES =================================================
 
 // Importa o store de cores
 const colorStore = useColorStore()
 const userStore = useUsersStore()
+const navbarStore = useNavbarStore()
 const router = useRouter()
 
 //Variáveis reativas para os campos do formulário
@@ -98,6 +100,12 @@ function sendData() {
   name.value = ""
   email.value = ""
   password.value = ""
+
+  console.log(navbarStore) // deve mostrar o objeto da store
+  console.log(typeof navbarStore.logged)
+
+  userStore.isAuthenticated = true
+  navbarStore.logged()
 
   //Ir para a página principal após o envio dos dados
   router.push("/main")

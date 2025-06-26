@@ -11,8 +11,15 @@
 <script setup>
 import { useColorStore } from "@/stores/colors"
 import TableHome from "./TableHome.vue"
+import { useNavbarStore } from "@/stores/navbar"
+import { onMounted } from "vue"
 
 const colorStore = useColorStore()
+const navbarStore = useNavbarStore()
+
+onMounted(() => {
+  navbarStore.loggedOut()
+})
 </script>
 
 <style scoped>

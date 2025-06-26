@@ -1,5 +1,6 @@
 import { defineStore } from "pinia"
 import { ref } from "vue"
+import { useNavbarStore } from "@/stores/navbar"
 
 export const useColorStore = defineStore(
   "colors",
@@ -7,10 +8,15 @@ export const useColorStore = defineStore(
     const color = ref("#171f40")
     const btnColor = ref("#303f7e")
     const showModal = ref(false)
+    const navbarStore = useNavbarStore()
 
     // Fecha ou abre o modal
     function changeShowModal() {
       this.showModal = !this.showModal
+
+      if (navbarStore.showModal === true) {
+        navbarStore.showModal = false
+      }
     }
 
     // Altera a cor principal e a cor do botão
