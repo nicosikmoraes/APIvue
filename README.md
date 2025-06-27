@@ -8,19 +8,26 @@ Na tabela da página inicial foi adicionado um botão que quando clicado ele del
 
 Além da coneão com o banco de dados eu explorei o uso de pinia para a disponibilização de diferentes temas para o usuário;
 
+Temos agora itens para serem comprados que seriam meus projetos (foram adicionados em um banco de dados), podendo selecionar o item e adicionar no seu carrinho, ou clicar para ver o código do projeto no GitHub; 
+
+Quero pegar os dados para mostrar no finalizar compras usando o inner join para pegar todos os dados do usuário e dos itens já que quando adiciono ao carrinho eu salvo os itens em uma tabela no banco de dados chamada carts passanco o id do usuário e o id dos itens como chaves estrangeiras;
+
+## Objetivo
+O projeto é um crud onde na página inicial aparece todas as contas podendo criar contas novas, deletar e logar. Quando entrar em uma conta o usuário vai ser redirecionado para uma página com itens (que seriam meus projetos) onde eles tem a opção de comprar esses itens;
+
 ## Pontos pequenos que faltam
   - Não poder criar várias contas com o mesmo email;
   - Usar o alert do `SweetAlert2`;
   - Arrumar o Disabled do botão de login (chato);
-  - Usar o Axios se eu quiser;
+  - Usar o Axios se eu quiser (Uso nos novos);
   - A senha quando passada no PHP dá pra criptografar ela (fácil);
   - Criar um Favicon;
 
 ## Próximas etapas 
-  - Crud - OK;
-  - Cria opção de deletar - OK;
-  - Desenvolver a `Main Page`;
-  - Desenvolver a `Home Page`, - OK;
+  - Finalizar o carrinho;
+  - Ver a questão de selecionado (acho que vou desistir por enquanto);
+  - Fazer a página de finalizar compra;
+  - Fazer a página de configurações para o usuário poder alterar seus dados;
   - ...
 
 ## Pontos Negativos
