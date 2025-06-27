@@ -51,10 +51,12 @@ $users = [];
     // EXECUTA A CONSULTA
     $executed = $stmt->execute();
 
-    // VERIFICA SE A CONSULTA FOI EXECUTADA COM SUCESSO
-    if ($executed) {
-        echo json_encode(["mensagem" => "Usuário cadastrado com sucesso"]);
-    } else {
-        http_response_code(500);
-        echo json_encode(["erro" => "Erro ao salvar no banco"]);
-    }
+// VERIFICA SE A CONSULTA FOI EXECUTADA COM SUCESSO
+if ($executed) {
+    $newUserId = $conn->lastInsertId(); // Pega o ID do novo usuário inserido
+    echo json_encode([
+        "user_id" => $newUserId
+    ]);
+} else {
+    http_response_code(500);
+}

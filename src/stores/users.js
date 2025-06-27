@@ -14,6 +14,7 @@ export const useUsersStore = defineStore(
     const name = ref("")
     const email = ref("")
     const password = ref("")
+    const id = ref("")
 
     // ============================== FUNCTIONS =================================================
 
@@ -22,7 +23,6 @@ export const useUsersStore = defineStore(
     async function fetchUsers() {
       // Fetch users from the Database
       const res = await fetch("http://localhost:8000/api.php")
-      console.log(res)
 
       // Populate the users array with the response data
       users.value = await res.json()
@@ -46,7 +46,7 @@ export const useUsersStore = defineStore(
     // Update the database with the new user data
     async function updateDb() {
       // Get the path to the register.php file
-      await fetch("http://localhost:8000/register.php", {
+      const res = await fetch("http://localhost:8000/register.php", {
         // Send a POST request to the register.php file
         method: "POST",
         headers: {
@@ -59,13 +59,17 @@ export const useUsersStore = defineStore(
           senha: password.value,
         }),
       })
+
+      // Get the user id from the response
+      const data = await res.json()
+      id.value = data.user_id
     }
 
     // ============================== LOGIN USER =================================================
     // Function to log in a user
     async function loginUser(newEmail, newPassword) {
       // Use the login.php file to log in the user
-      return await fetch("http://localhost:8000/login.php", {
+      const res = await fetch("http://localhost:8000/login.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -75,27 +79,22 @@ export const useUsersStore = defineStore(
           senha: newPassword,
         }),
       })
-        .then(async (res) => {
-          if (!res.ok) {
-            // If the response is not ok, throw an error
-            const err = await res.json()
-            throw new Error(err.erro || "Erro no login")
-          }
-          // If the response is ok, return the response data
-          return res.json()
-        })
-        .then((data) => {
-          // Populate the name, email, and password variables with the user data
-          name.value = data.user.nome
-          email.value = data.user.email
-          password.value = data.user.senha
 
-          // Log the user data to the console
-          console.log("data: ", data)
+      // Verifica se a resposta foi bem-sucedida
+      if (!res.ok) {
+        const errorData = await res.json()
+        throw new Error(errorData.erro)
+      }
 
-          // Return the data
-          return data
-        })
+      const data = await res.json()
+
+      // Preenche os valores reativos com os dados do usuário
+      name.value = data.user.nome
+      email.value = data.user.email
+      password.value = data.user.senha
+      id.value = data.user.id
+
+      return data.user // <-- importante retornar
     }
 
     // ============================== DELETE USER =================================================
@@ -128,6 +127,7 @@ export const useUsersStore = defineStore(
       email,
       password,
       isAuthenticated,
+      id,
       fetchUsers,
       addUser,
       updateDb,

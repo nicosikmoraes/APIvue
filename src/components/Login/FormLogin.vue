@@ -72,7 +72,7 @@ async function checkLogin() {
 
     router.push("/main")
   } catch (error) {
-    alert("Email ou senha inválidos." + error.message)
+    alert("Email ou senha inválidos.")
   }
 }
 </script>
