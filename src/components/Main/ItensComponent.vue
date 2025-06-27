@@ -49,8 +49,8 @@ onMounted(async () => {
   background-position: center; /* centraliza a imagem */
   height: 200px; /* altura total da tela */
   width: 200px; /* largura total da tela */
-  border-radius: 30px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -62,6 +62,7 @@ onMounted(async () => {
 .itens_container:hover {
   opacity: 0.85;
   transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
 }
 
 /* ============================== TEXT ================================================= */
