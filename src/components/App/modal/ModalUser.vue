@@ -8,7 +8,9 @@
 
     <main class="modal-body">
       <button class="btn_modal" :style="{ color: colorStore.color }">Conta</button>
-      <button class="btn_modal" :style="{ color: colorStore.color }">Carrinho (0)</button>
+      <button class="btn_modal" :style="{ color: colorStore.color }">
+        Carrinho ({{ userStore.cart_itens }})
+      </button>
     </main>
   </div>
   <!-- ================================= FIM MODAL ====================================== -->
@@ -17,10 +19,12 @@
 <script setup>
 import { useColorStore } from "@/stores/colors"
 import { useNavbarStore } from "@/stores/navbar"
+import { useUsersStore } from "@/stores/users"
 
 // Importa o store de cores
 const colorStore = useColorStore()
 const navbarStore = useNavbarStore()
+const userStore = useUsersStore()
 
 // Função para fechar o modal
 function close() {

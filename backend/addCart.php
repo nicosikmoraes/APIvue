@@ -74,7 +74,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
         http_response_code(500);
         echo json_encode(["erro" => "Erro ao adicionar item ao carrinho", "detalhes" => $e->getMessage()]);
     }
-    
+
+    $stmt2 = $conn->prepare("UPDATE users SET itens_carrinho = itens_carrinho + 1 WHERE id = :user_id");
+    $stmt2->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt2->execute();
+
     exit;
 
     

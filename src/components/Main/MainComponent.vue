@@ -1,6 +1,6 @@
 <template>
   <div class="container-main">
-    <h1 :style="{ color: colorStore.color }">Olá {{ userStore.name }} id: {{ userStore.id }}</h1>
+    <h1 :style="{ color: colorStore.color }">Olá {{ userStore.name }}</h1>
 
     <ItensComponentVue />
   </div>

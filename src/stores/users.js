@@ -15,6 +15,7 @@ export const useUsersStore = defineStore(
     const email = ref("")
     const password = ref("")
     const id = ref("")
+    const cart_itens = ref(0)
 
     // ============================== FUNCTIONS =================================================
 
@@ -93,6 +94,7 @@ export const useUsersStore = defineStore(
       email.value = data.user.email
       password.value = data.user.senha
       id.value = data.user.id
+      cart_itens.value = data.user.itens_carrinho
 
       return data.user // <-- importante retornar
     }
