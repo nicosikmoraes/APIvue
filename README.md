@@ -23,21 +23,27 @@ O projeto é um crud onde na página inicial aparece todas as contas podendo cri
 
 ## Próximas etapas
 
-- Finalizar o carrinho;
 - Ver a questão de selecionado (acho que vou desistir por enquanto);
 - Fazer a página de finalizar compra;
 - Fazer a página de configurações para o usuário poder alterar seus dados;
 - ...
 
+## Ideias
+
+ - Pensar se pode comprar mais que um (acho que vou deixar);
+
 ## Pontos Negativos
 
 - Toda parte de comunicação do frontend com o backend foi feita usando pinia e não em uma pasta de services;
-- Foi usado `fetch` e não `axios` como recomendado;
 
 ## Pontos Positivos
 
 - Ta tudo bem componentizado eu acredito;
 - Navbar e Footer componetizados;
+- Validação nos formuários;
+- Verificação para evitar duas contas com o mesmo email;
+- Alertas estilizados;
+- Comentários;
 
 ## Screenshots
 
