@@ -53,6 +53,8 @@ O projeto é um crud onde na página inicial aparece todas as contas podendo cri
 ![image](https://github.com/user-attachments/assets/ed633e6f-d2c8-482e-bcbd-b65dd5e37450)
 ![image](https://github.com/user-attachments/assets/328425d9-2215-4888-9655-581362c41c2e)
 ![image](https://github.com/user-attachments/assets/28e8442c-d98b-4a89-871a-bc8f20627c8f)
+![image](https://github.com/user-attachments/assets/b16bed7c-8146-4fc2-8bae-cdd0027edc9d)
+
 
 
 
