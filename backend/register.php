@@ -51,12 +51,20 @@ $users = [];
     // EXECUTA A CONSULTA
     $executed = $stmt->execute();
 
-// VERIFICA SE A CONSULTA FOI EXECUTADA COM SUCESSO
-if ($executed) {
-    $newUserId = $conn->lastInsertId(); // Pega o ID do novo usuário inserido
-    echo json_encode([
-        "user_id" => $newUserId
-    ]);
-} else {
-    http_response_code(500);
-}
+    // PREPARA A CONSULTA PARA BUSCAR O USUÁRIO DE ACORDO COM O EMAIL
+    $stmt2 = $conn->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+
+    // BIND PARAMS
+    $stmt2->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt2->execute();
+
+    // PEGA OS DADOS DO RESULTADO DA CONSULTA SELECT
+    $user_data = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+    // O $result['senha'] é a senha armazenada no banco de dados
+    if ($user_data){
+        echo json_encode(["mensagem" => "Cadastro realizado com sucesso", "user" => $user_data]);
+    } else {
+        http_response_code(401);
+        echo json_encode(["erro" => "Erro ao cadastrar usuário"]);
+    }

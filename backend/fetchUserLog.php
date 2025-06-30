@@ -15,6 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
+// VARIÁVEL QUE VAI RECEBER TODOS OS USUÁRIOS
+$users = [];
+
     // Database connection
     $host = '127.0.0.1';
     $userdb = 'root';
@@ -37,32 +40,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     // RECEBE OS DADOS JSON E TRANSFORMA EM UM ARRAY PHP
     $data = json_decode(file_get_contents('php://input'), true);
 
-    // VERIFICA SE OS DADOS FORAM RECEBIDOS CORRETAMENTE
-    if (!$data) {
-        error_log("Erro: JSON inválido recebido");
-        http_response_code(400);
-        echo json_encode(["erro" => "Dados de login ausentes ou malformados"]);
-        exit;
-    }
+    $id = $data['user_id'];
 
-    // PEGA OS VALORES ENVIADOS DO FRONTEND E POPULA AS VARIÁVEIS
-    $email = $data['email'];
-    $senha = $data['senha'];
+    $stmt = $conn->prepare("SELECT * FROM users WHERE id = :id");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
-    // PREPARA A CONSULTA PARA BUSCAR O USUÁRIO DE ACORDO COM O EMAIL
-    $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
-
-    // BIND PARAMS
-    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    // SE A CONSULTA FOR EXECUTADA COM SUCESSO, BUSCA TODOS OS USUÁRIOS
     $stmt->execute();
 
     // PEGA OS DADOS DO RESULTADO DA CONSULTA SELECT
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // O $result['senha'] é a senha armazenada no banco de dados
-    if ($user && isset($user['senha']) && $user['senha'] === $senha){
-        echo json_encode(["mensagem" => "Login realizado com sucesso", "user" => $user]);
+    if ($user_data){
+        echo json_encode(["mensagem" => "Usuário encontrado com sucesso", "user" => $user_data]);
     } else {
         http_response_code(401);
-        echo json_encode(["erro" => "Email ou senha incorretos"]);
+        echo json_encode(["erro" => "Usuário não encontrado"]);
     }

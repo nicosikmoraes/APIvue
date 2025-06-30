@@ -32,20 +32,15 @@ export const useUsersStore = defineStore(
     // ============================== REGISTER USER =================================================
     // Add a new user to the database
     async function addUser(newName, newEmail, newPassword) {
-      // Populate the name, email, and password variables with the new user data
-      name.value = newName
-      email.value = newEmail
-      password.value = newPassword
-
       // Call the updateDb function to update the database
-      await updateDb()
+      await updateDb(newName, newEmail, newPassword)
 
       // Call the fetchUsers function to get the new users from the database
       await fetchUsers()
     }
 
     // Update the database with the new user data
-    async function updateDb() {
+    async function updateDb(newName, newEmail, newPassword) {
       // Get the path to the register.php file
       const res = await fetch("http://localhost:8000/register.php", {
         // Send a POST request to the register.php file
@@ -55,15 +50,27 @@ export const useUsersStore = defineStore(
         },
         // Send the user data as a JSON object
         body: JSON.stringify({
-          nome: name.value,
-          email: email.value,
-          senha: password.value,
+          nome: newName,
+          email: newEmail,
+          senha: newPassword,
         }),
       })
 
-      // Get the user id from the response
       const data = await res.json()
-      id.value = data.user_id
+
+      // Verifica se a resposta foi bem-sucedida
+      if (!res.ok) {
+        throw new Error(data.erro || "Erro ao cadastrar usuário")
+      }
+
+      // Preenche os valores reativos com os dados do usuário
+      name.value = data.user.nome
+      email.value = data.user.email
+      password.value = data.user.senha
+      id.value = data.user.id
+      cart_itens.value = data.user.itens_carrinho
+
+      return data.user // <-- importante retornar
     }
 
     // ============================== LOGIN USER =================================================
@@ -130,6 +137,7 @@ export const useUsersStore = defineStore(
       password,
       isAuthenticated,
       id,
+      cart_itens,
       fetchUsers,
       addUser,
       updateDb,
