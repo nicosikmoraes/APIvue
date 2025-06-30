@@ -47,9 +47,15 @@ O projeto é um crud onde na página inicial aparece todas as contas podendo cri
 
 ## Screenshots
 
-![image](https://github.com/user-attachments/assets/3ebcde47-23b6-4c73-9b11-f8de515afd3c)
-![image](https://github.com/user-attachments/assets/5696d43f-e4ab-4040-afb0-c90b8f2b09fa)
-![image](https://github.com/user-attachments/assets/aab19c22-de83-4639-882a-26d66285612d)
-![image](https://github.com/user-attachments/assets/3ea731c2-1859-4deb-92e5-5b5517361fec)
-![image](https://github.com/user-attachments/assets/a2480c60-da44-42c1-ab8b-7c8291bacc67)
-![image](https://github.com/user-attachments/assets/edb89ef9-064b-4535-ad7a-e31f2ef1f5c1)
+![image](https://github.com/user-attachments/assets/59e6f86a-a03d-4901-9e09-31fabc7ef191)
+![image](https://github.com/user-attachments/assets/f9dad755-a15e-447d-8ce9-49c5dec0da76)
+![image](https://github.com/user-attachments/assets/b0982612-ae3b-4a77-955d-8a16caf98c67)
+![image](https://github.com/user-attachments/assets/ed633e6f-d2c8-482e-bcbd-b65dd5e37450)
+![image](https://github.com/user-attachments/assets/328425d9-2215-4888-9655-581362c41c2e)
+![image](https://github.com/user-attachments/assets/28e8442c-d98b-4a89-871a-bc8f20627c8f)
+
+
+
+
+
+
