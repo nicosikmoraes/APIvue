@@ -8,14 +8,11 @@
 
 <script setup>
 import { useUsersStore } from "@/stores/users"
-import HoverComponentVue from "./HoverComponent.vue"
-import { useItensStore } from "@/stores/itens"
 import ItensComponentVue from "./ItensComponent.vue"
 import { useColorStore } from "@/stores/colors"
 
 // ============================== VARIABLES =================================================
 const userStore = useUsersStore()
-const itensStore = useItensStore()
 const colorStore = useColorStore()
 </script>
 

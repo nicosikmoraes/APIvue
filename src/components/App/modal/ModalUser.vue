@@ -7,7 +7,7 @@
     </header>
 
     <main class="modal-body">
-      <button class="btn_modal" :style="{ color: colorStore.color }">Conta</button>
+      <button class="btn_modal" :style="{ color: colorStore.color }" @click="goToConfig()">Conta</button>
       <button class="btn_modal" :style="{ color: colorStore.color }">
         Carrinho ({{ userStore.cart_itens }})
       </button>
@@ -20,15 +20,21 @@
 import { useColorStore } from "@/stores/colors"
 import { useNavbarStore } from "@/stores/navbar"
 import { useUsersStore } from "@/stores/users"
+import { useRouter } from "vue-router"
 
 // Importa o store de cores
 const colorStore = useColorStore()
 const navbarStore = useNavbarStore()
 const userStore = useUsersStore()
+const router = useRouter()
 
 // Função para fechar o modal
 function close() {
   navbarStore.changeShowModal()
+}
+
+function goToConfig() {
+  router.push("/config")
 }
 </script>
 

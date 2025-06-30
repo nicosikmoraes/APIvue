@@ -1,8 +1,8 @@
 <template>
   <div class="navbar" :style="{ backgroundColor: colorStore.color }">
     <!-- Navega para Home -->
-    <router-link to="/" id="logo">
-      <h1 @click="exit()">APIvue</h1>
+    <router-link to="/main" id="logo">
+      <h1>APIvue</h1>
     </router-link>
 
     <div class="btns">
