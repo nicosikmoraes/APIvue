@@ -53,6 +53,7 @@ import { ref, computed } from "vue"
 import { useUsersStore } from "@/stores/users"
 import { useRouter } from "vue-router"
 import { useNavbarStore } from "@/stores/navbar"
+import Swal from "sweetalert2"
 
 // ============================== VARIABLES =================================================
 
@@ -111,7 +112,11 @@ async function sendData() {
     //Ir para a página principal após o envio dos dados
     router.push("/main")
   } catch (error) {
-    alert("Email já existe")
+    Swal.fire({
+      icon: "error",
+      title: "Erro ao cadastrar",
+      text: "Uma conta já existe com esse email",
+    })
   }
 }
 </script>

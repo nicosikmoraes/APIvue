@@ -39,6 +39,7 @@ import { ref, computed } from "vue"
 import { useUsersStore } from "@/stores/users"
 import { useRouter } from "vue-router"
 import { useNavbarStore } from "@/stores/navbar"
+import Swal from "sweetalert2"
 
 // Variáveis reativas para os campos do formulário
 const email = ref("")
@@ -72,7 +73,11 @@ async function checkLogin() {
 
     router.push("/main")
   } catch (error) {
-    alert("Email ou senha inválidos.")
+    Swal.fire({
+      icon: "error",
+      title: "Erro ao entrar",
+      text: "Email ou senha incorretos.",
+    })
   }
 }
 </script>

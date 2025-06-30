@@ -1,5 +1,7 @@
 import { defineStore } from "pinia"
 import { ref } from "vue"
+import Swal from "sweetalert2"
+import axios from "axios"
 
 export const useUsersStore = defineStore(
   "users",
@@ -20,114 +22,96 @@ export const useUsersStore = defineStore(
     // ============================== FUNCTIONS =================================================
 
     // ============================== GET USERS =================================================
-    // get users from the database
+    // Pegar TODOS os usuários da base de dados
     async function fetchUsers() {
-      // Fetch users from the Database
-      const res = await fetch("http://localhost:8000/api.php")
-
-      // Populate the users array with the response data
-      users.value = await res.json()
+      const res = await axios.get("http://localhost:8000/api.php")
+      users.value = res.data // Popula o array com os dados do usuário
     }
 
     // ============================== REGISTER USER =================================================
-    // Add a new user to the database
+    // Vou registrar um novo usuário
     async function addUser(newName, newEmail, newPassword) {
-      // Call the updateDb function to update the database
-      await updateDb(newName, newEmail, newPassword)
+      await updateDb(newName, newEmail, newPassword) // Atualiza o banco de dados
 
-      // Call the fetchUsers function to get the new users from the database
-      await fetchUsers()
+      await fetchUsers() // Atualiza o array com os dados do novo usuário
     }
 
     // Update the database with the new user data
     async function updateDb(newName, newEmail, newPassword) {
-      // Get the path to the register.php file
-      const res = await fetch("http://localhost:8000/register.php", {
-        // Send a POST request to the register.php file
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        // Send the user data as a JSON object
-        body: JSON.stringify({
+      try {
+        const res = await axios.post("http://localhost:8000/register.php", {
           nome: newName,
           email: newEmail,
           senha: newPassword,
-        }),
-      })
+        })
 
-      // Verifica se a resposta foi bem-sucedida
-      if (!res.ok) {
-        const errorData = await res.json()
-        throw new Error(errorData.erro)
+        //Os dados retornados pelo backend
+        const data = res.data
+
+        // Preenche os valores reativos com os dados do usuário
+        name.value = data.user.nome
+        email.value = data.user.email
+        password.value = data.user.senha
+        id.value = data.user.id
+        cart_itens.value = data.user.itens_carrinho
+      } catch (error) {
+        // axios já trata erros HTTP aqui
+        const errorMessage = error.response?.data?.erro
+        throw new Error(errorMessage)
       }
-
-      const data = await res.json()
-
-      // Preenche os valores reativos com os dados do usuário
-      name.value = data.user.nome
-      email.value = data.user.email
-      password.value = data.user.senha
-      id.value = data.user.id
-      cart_itens.value = data.user.itens_carrinho
-
-      return data.user // <-- importante retornar
     }
 
     // ============================== LOGIN USER =================================================
     // Function to log in a user
     async function loginUser(newEmail, newPassword) {
-      // Use the login.php file to log in the user
-      const res = await fetch("http://localhost:8000/login.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      try {
+        // Envia os dados para login.php
+        const res = await axios.post("http://localhost:8000/login.php", {
           email: newEmail,
           senha: newPassword,
-        }),
-      })
+        })
 
-      // Verifica se a resposta foi bem-sucedida
-      if (!res.ok) {
-        const errorData = await res.json()
-        throw new Error(errorData.erro)
+        //Os dados retornados pelo backend
+        const data = res.data
+
+        // Preenche os valores reativos com os dados do usuário
+        name.value = data.user.nome
+        email.value = data.user.email
+        password.value = data.user.senha
+        id.value = data.user.id
+        cart_itens.value = data.user.itens_carrinho
+      } catch (error) {
+        // Trata o erro retornado do servidor
+        const errorMessage = error.response?.data?.erro
+        throw new Error(errorMessage)
       }
-
-      const data = await res.json()
-
-      // Preenche os valores reativos com os dados do usuário
-      name.value = data.user.nome
-      email.value = data.user.email
-      password.value = data.user.senha
-      id.value = data.user.id
-      cart_itens.value = data.user.itens_carrinho
-
-      return data.user // <-- importante retornar
     }
 
     // ============================== DELETE USER =================================================
     async function deleteUser(id) {
-      // Use the delete.php file to delete the user
-      const res = await fetch("http://localhost:8000/delete.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      try {
+        // Envia requisição para deletar o usuário
+        const res = await axios.post("http://localhost:8000/delete.php", {
           id: id,
-        }),
-      })
+        })
 
-      // Check if the request was successful
-      const data = await res.json()
+        // Exibe alerta de sucesso
+        Swal.fire({
+          icon: "success",
+          title: "Conta deletada!",
+          text: "Usuário deletado com sucesso!",
+        })
 
-      // Alert the user if the request was successful
-      alert("Usuário excluído com sucesso!")
-
-      // Fetch the users again
-      await fetchUsers()
+        // Recarrega a lista de usuários
+        await fetchUsers()
+      } catch (error) {
+        // Trata erros (exibe alerta com a mensagem do servidor)
+        Swal.fire({
+          icon: "error",
+          title: "Erro ao deletar",
+          text: error.response?.data?.erro,
+        })
+      }
     }
 
     // ============================== RETURN =================================================
