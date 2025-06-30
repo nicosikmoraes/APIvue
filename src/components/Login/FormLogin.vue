@@ -65,7 +65,7 @@ const validEmail = computed(() => {
 /* ========================== FUNCTIONS =============================== */
 async function checkLogin() {
   try {
-    const user = await userStore.loginUser(email.value, password.value)
+    await userStore.loginUser(email.value, password.value)
 
     userStore.isAuthenticated = true
     navbarStore.logged()

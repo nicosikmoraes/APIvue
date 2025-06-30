@@ -56,12 +56,13 @@ export const useUsersStore = defineStore(
         }),
       })
 
-      const data = await res.json()
-
       // Verifica se a resposta foi bem-sucedida
       if (!res.ok) {
-        throw new Error(data.erro || "Erro ao cadastrar usuário")
+        const errorData = await res.json()
+        throw new Error(errorData.erro)
       }
+
+      const data = await res.json()
 
       // Preenche os valores reativos com os dados do usuário
       name.value = data.user.nome

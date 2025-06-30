@@ -40,6 +40,20 @@ $users = [];
     $email = $data['email'];
     $senha = $data['senha'];
 
+    //VERIFICAR SE O EMAIL JÁ EXISTE
+    // O COUNT(*) retorna o número de registros que o SELECT encontra, ou seja se encontrar uma conta vai retornar um, duas contas retorna 2 e nenhuma retorna 0;
+    $stmt3 = $conn->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
+    $stmt3->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt3->execute();
+
+    $emailExists = $stmt3->fetchColumn();
+
+    if ($emailExists > 0) {
+        http_response_code(401);
+        echo json_encode(["erro" => "Email já cadastrado"]);
+        exit;
+    }
+
     // PREPARA A CONSULTA PARA INSERIR UM NOVO USUÁRIO
     $stmt = $conn->prepare("INSERT INTO users (nome, email, senha) VALUES (:nome, :email, :senha)");
     

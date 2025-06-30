@@ -92,23 +92,27 @@ const validName = computed(() => {
 // ============================== FUNCTIONS =================================================
 
 // Função para enviar os dados do formulário
-function sendData() {
-  // Chama a função do store para adicionar o usuário
-  userStore.addUser(name.value, email.value, password.value)
+async function sendData() {
+  try {
+    // Chama a função do store para adicionar o usuário
+    await userStore.addUser(name.value, email.value, password.value)
 
-  // Limpa os campos do formulário
-  name.value = ""
-  email.value = ""
-  password.value = ""
+    // Limpa os campos do formulário
+    name.value = ""
+    email.value = ""
+    password.value = ""
 
-  console.log(navbarStore) // deve mostrar o objeto da store
-  console.log(typeof navbarStore.logged)
+    console.log(navbarStore) // deve mostrar o objeto da store
+    console.log(typeof navbarStore.logged)
 
-  userStore.isAuthenticated = true
-  navbarStore.logged()
+    userStore.isAuthenticated = true
+    navbarStore.logged()
 
-  //Ir para a página principal após o envio dos dados
-  router.push("/main")
+    //Ir para a página principal após o envio dos dados
+    router.push("/main")
+  } catch (error) {
+    alert("Email já existe")
+  }
 }
 </script>
 
