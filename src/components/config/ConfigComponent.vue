@@ -44,14 +44,14 @@ header {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 7px 10px;
+  padding: 10px 15px;
   margin-top: 60px;
 }
 
 h1 {
-  font-size: 18px;
-  font-weight: 550;
-  margin-left: 30%;
+  font-size: 21px;
+  font-weight: bolder;
+  margin-left: 27%;
 }
 
 /* ============================== MAIN ================================================= */

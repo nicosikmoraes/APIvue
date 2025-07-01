@@ -8,7 +8,7 @@
 
     <main class="modal-body">
       <button class="btn_modal" :style="{ color: colorStore.color }" @click="goToConfig()">Conta</button>
-      <button class="btn_modal" :style="{ color: colorStore.color }">
+      <button class="btn_modal" :style="{ color: colorStore.color }" @click="goToShop()">
         Carrinho ({{ userStore.cart_itens }})
       </button>
     </main>
@@ -35,6 +35,11 @@ function close() {
 
 function goToConfig() {
   router.push("/config")
+  close()
+}
+
+function goToShop() {
+  router.push("/shop")
   close()
 }
 </script>

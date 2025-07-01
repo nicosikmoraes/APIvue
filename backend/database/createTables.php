@@ -44,7 +44,7 @@ $sql_itens = "CREATE TABLE IF NOT EXISTS itens (
     titulo VARCHAR(220) NOT NULL UNIQUE,
     link VARCHAR(420) NOT NULL UNIQUE,
     img VARCHAR(420) NOT NULL UNIQUE,
-    valor INT DEFAULT 500,
+    valor INT DEFAULT 5,
     hover TINYINT(1) DEFAULT 0
 )";
 

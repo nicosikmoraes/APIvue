@@ -44,11 +44,22 @@ export const useCartsStore = defineStore(
       userStore.cart_itens = data.user.itens_carrinho
     }
 
+    async function getCart(id) {
+      const res = await api.post("getCart.php", {
+        id: id,
+      })
+
+      const data = await res.data
+      console.log("cart:", data)
+      carts.value = data
+    }
+
     // ============================== RETURN =================================================
     return {
       carts,
       addCart,
       fetchUserLogged,
+      getCart,
     }
   },
   { persist: true },

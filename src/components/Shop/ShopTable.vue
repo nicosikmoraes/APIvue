@@ -2,20 +2,27 @@
   <div class="container-table">
     <!-- Isso mostra o conteúdo do array -->
     <table class="table">
-      <thead :style="{ backgroundColor: colorStore.color }">
-        <tr>
-          <th :style="{ border: '1px solid ' + colorStore.color }">ID</th>
-          <th :style="{ border: '1px solid ' + colorStore.color }">Nome</th>
-          <th :style="{ border: '1px solid ' + colorStore.color }">Email</th>
-          <th :style="{ border: '1px solid ' + colorStore.color }"></th>
+      <thead :style="{ color: colorStore.color }">
+        <tr :style="{ borderBottom: '1px solid ' + colorStore.color }">
+          <th>Id</th>
+          <th>Aplicação</th>
+          <th>Valor</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr class="line" v-for="user in userStore.users" :key="user.id" :style="{ color: colorStore.color }">
-          <td class="text" :style="{ border: '1px solid ' + colorStore.color }">{{ user.id }}</td>
-          <td class="text" :style="{ border: '1px solid ' + colorStore.color }">{{ user.nome }}</td>
-          <td class="text" :style="{ border: '1px solid ' + colorStore.color }">{{ user.email }}</td>
-          <td :style="{ border: '1px solid ' + colorStore.color }" @click="userStore.deleteUser(user.id)">
+        <tr
+          class="line"
+          v-for="item in cartStore.carts.itens"
+          :key="item.id"
+          :style="{ color: colorStore.color, borderBottom: '1px solid ' + colorStore.color }"
+        >
+          <td class="text">{{ item.id }}.</td>
+          <td class="text">{{ item.titulo }}</td>
+          <td class="text">
+            {{ formatPrice(item.valor) }}
+          </td>
+          <td>
             <img src="/src/assets/images/trash.png" />
           </td>
         </tr>
@@ -26,26 +33,31 @@
 
 <script setup>
 import { useColorStore } from "@/stores/colors"
-import { onMounted, ref } from "vue"
 import { useUsersStore } from "@/stores/users"
+import { useCartsStore } from "@/stores/carts"
 
 const colorStore = useColorStore()
 const userStore = useUsersStore()
+const cartStore = useCartsStore()
 
-onMounted(async () => {
-  // Fetch users when the component is mounted
-  await userStore.fetchUsers()
-})
+function formatPrice(price) {
+  return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(price)
+}
 </script>
 
 <style scoped>
+.container-table {
+  width: 55%;
+  margin-left: 15px;
+}
+
 /* ========================== TEXT ================================= */
 th {
-  font-size: 19px;
+  font-size: 17px;
 }
 
 .text {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
   transition: 0.3s;
 }
@@ -53,7 +65,6 @@ th {
 /* ========================== TABLE ================================= */
 .table {
   width: 100%;
-  margin-top: 20px;
   border-collapse: collapse;
   transition: 0.3s;
 }
@@ -73,7 +84,7 @@ th {
 /* TABLE BODY */
 td {
   text-align: center;
-  padding: 6px 16px;
+  padding: 6px 10px;
   transition: 0.3s;
 }
 
@@ -84,7 +95,7 @@ tbody tr:hover {
 
 /* ========================== IMAGE ================================= */
 img {
-  height: 25px;
+  height: 23px;
   margin-top: 5px;
 }
 

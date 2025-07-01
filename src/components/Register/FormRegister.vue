@@ -1,5 +1,5 @@
 <template>
-  <div class="form-login">
+  <div class="form_register">
     <form>
       <!-- Input nome -->
       <input
@@ -122,6 +122,10 @@ async function sendData() {
 </script>
 
 <style scoped>
+.form_register {
+  width: 330px;
+}
+
 /* ========================== FORM =============================== */
 form {
   display: flex;
@@ -132,16 +136,17 @@ form {
 }
 
 input {
-  padding: 8px 16px;
+  padding: 10px 16px;
   border-radius: 6px;
   border: 2px solid;
   transition: 0.3s;
+  width: 100%;
 }
 
 /* ========================== BTN =============================== */
 button {
   border: none;
-  padding: 9px 16px;
+  padding: 11px 16px;
   border-radius: 6px;
   color: white;
   font-weight: 600;

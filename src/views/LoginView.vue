@@ -24,7 +24,7 @@ const colorStore = useColorStore()
 
 /* ========================== TEXT =============================== */
 h1 {
-  font-size: 26px;
+  font-size: 30px;
   margin-bottom: 6px;
   transition: 0.3s;
 }

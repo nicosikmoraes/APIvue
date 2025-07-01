@@ -5,6 +5,7 @@ import RegisterView from "@/views/RegisterView.vue"
 import MainView from "@/views/MainView.vue"
 import { useUsersStore } from "@/stores/users"
 import ConfigView from "@/views/ConfigView.vue"
+import ShopView from "@/views/ShopView.vue"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,6 +38,12 @@ const router = createRouter({
       path: "/config",
       name: "config",
       component: ConfigView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/shop",
+      name: "shop",
+      component: ShopView,
       meta: { requiresAuth: true },
     },
   ],
