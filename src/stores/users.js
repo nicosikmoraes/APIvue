@@ -19,12 +19,16 @@ export const useUsersStore = defineStore(
     const id = ref("")
     const cart_itens = ref(0)
 
+    const api = axios.create({
+      baseURL: "http://localhost:8000/backend/user/",
+    })
+
     // ============================== FUNCTIONS =================================================
 
     // ============================== GET USERS =================================================
     // Pegar TODOS os usuários da base de dados
     async function fetchUsers() {
-      const res = await axios.get("http://localhost:8000/api.php")
+      const res = await api.get("api.php")
       users.value = res.data // Popula o array com os dados do usuário
     }
 
@@ -39,7 +43,7 @@ export const useUsersStore = defineStore(
     // Update the database with the new user data
     async function updateDb(newName, newEmail, newPassword) {
       try {
-        const res = await axios.post("http://localhost:8000/register.php", {
+        const res = await api.post("register.php", {
           nome: newName,
           email: newEmail,
           senha: newPassword,
@@ -66,7 +70,7 @@ export const useUsersStore = defineStore(
     async function loginUser(newEmail, newPassword) {
       try {
         // Envia os dados para login.php
-        const res = await axios.post("http://localhost:8000/login.php", {
+        const res = await api.post("login.php", {
           email: newEmail,
           senha: newPassword,
         })
@@ -91,7 +95,7 @@ export const useUsersStore = defineStore(
     async function deleteUser(id) {
       try {
         // Envia requisição para deletar o usuário
-        const res = await axios.post("http://localhost:8000/delete.php", {
+        const res = await api.post("delete.php", {
           id: id,
         })
 

@@ -1,20 +1,20 @@
 <template>
   <div class="container_p">
-    <p>Alterar nome:</p>
+    <p>Alterar email:</p>
     <div class="input_container">
       <input
-        class="name_input"
+        class="input"
         type="text"
-        placeholder="Digite o novo nome"
-        v-model="name"
+        placeholder="Digite o novo email"
+        v-model="email"
         :style="{ borderColor: colorStore.color }"
       />
       <button
-        class="name_btn"
+        class="btn"
         :style="{
           backgroundColor: colorStore.color,
         }"
-        @click="updateUser.updateUser(userStore.id, 'nome', name)"
+        @click="updateUser.updateUser(userStore.id, 'email', email)"
       >
         Alterar
       </button>
@@ -31,7 +31,7 @@ const colorStore = useColorStore()
 const userStore = useUsersStore()
 const updateUser = useUpdateUser()
 
-const name = userStore.name
+const email = userStore.email
 </script>
 
 <style scoped>
@@ -54,14 +54,14 @@ p {
   margin-left: 4px;
 }
 
-.name_input {
+.input {
   border-radius: 2px;
   border: 1px solid;
   transition: 0.3s;
   padding: 4px 12px;
 }
 
-.name_btn {
+.btn {
   border: none;
   padding: 6px 14px;
   border-radius: 6px;
@@ -73,7 +73,7 @@ p {
   cursor: pointer;
 }
 
-.name_btn:hover {
+.btn:hover {
   opacity: 1;
   transform: scale(1.05);
 }

@@ -2,11 +2,16 @@
   <div class="data_container">
     <header>
       <BackButton />
-      <h1>Configurações</h1>
+
+      <div class="title">
+        <h1>Configurações</h1>
+      </div>
     </header>
     <main>
       <div class="change_name">
         <NameInput />
+        <EmailInput />
+        <PasswordInput />
       </div>
     </main>
   </div>
@@ -15,6 +20,8 @@
 <script setup>
 import BackButton from "./BackButton.vue"
 import NameInput from "./Inputs/NameInput.vue"
+import EmailInput from "./Inputs/EmailInput.vue"
+import PasswordInput from "./Inputs/PasswordInput.vue"
 import { useUsersStore } from "@/stores/users"
 
 const userStore = useUsersStore()
@@ -28,6 +35,10 @@ const userStore = useUsersStore()
   width: 600px;
 }
 
+.title {
+  width: 90%;
+  display: flex;
+}
 /* ============================== HEADER ================================================= */
 header {
   display: flex;
@@ -35,12 +46,12 @@ header {
   justify-content: flex-start;
   padding: 7px 10px;
   margin-top: 60px;
-  gap: 185px;
 }
 
 h1 {
   font-size: 18px;
   font-weight: 550;
+  margin-left: 30%;
 }
 
 /* ============================== MAIN ================================================= */
@@ -53,7 +64,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 3px;
+  gap: 25px;
   padding: 0 25px;
 }
 </style>

@@ -21,12 +21,19 @@ import { useNavbarStore } from "./stores/navbar"
 import { useUsersStore } from "./stores/users"
 import { useRouter } from "vue-router"
 import { onMounted } from "vue"
+import { useDbStore } from "./stores/createDb"
 
 const navbarStore = useNavbarStore()
 const userStore = useUsersStore()
 const router = useRouter()
+const dbStore = useDbStore()
 
 onMounted(() => {
+  //Cria o banco de dados e as tabelas
+  dbStore.createDb()
+  dbStore.createTables()
+
+  // Verifica se o usuário está logado
   if (userStore.isAuthenticated) {
     router.push("/main")
   }

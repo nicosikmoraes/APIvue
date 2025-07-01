@@ -1,5 +1,7 @@
 <template>
-  <button class="back_btn" @click="backPage()"><img src="/src/assets/images/undo.png" /></button>
+  <div class="btn_container">
+    <button class="back_btn" @click="backPage()"><img src="/src/assets/images/undo.png" /></button>
+  </div>
 </template>
 
 <script setup>
@@ -13,6 +15,10 @@ function backPage() {
 </script>
 
 <style scoped>
+.btn_container {
+  width: 10%;
+}
+
 .back_btn {
   background-color: transparent;
   border: none;

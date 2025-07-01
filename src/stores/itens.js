@@ -9,11 +9,15 @@ export const useItensStore = defineStore(
 
     const itens = ref([])
 
+    const api = axios.create({
+      baseURL: "http://localhost:8000/backend/",
+    })
+
     // ============================== FUNCTIONS =================================================
 
     async function fetchItens() {
       // Get the itens from the database using axios
-      const res = await axios.get("http://localhost:8000/itens.php")
+      const res = await api.get("itens.php")
 
       // Populate the itens array with the response data
       itens.value = res.data

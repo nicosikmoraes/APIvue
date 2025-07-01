@@ -35,7 +35,6 @@ const userStore = useUsersStore()
 onMounted(async () => {
   // Fetch users when the component is mounted
   await userStore.fetchUsers()
-  console.log("Users fetched:", userStore.users)
 })
 </script>
 

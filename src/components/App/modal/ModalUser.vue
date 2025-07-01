@@ -35,6 +35,7 @@ function close() {
 
 function goToConfig() {
   router.push("/config")
+  close()
 }
 </script>
 
